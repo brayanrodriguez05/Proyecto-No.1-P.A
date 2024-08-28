@@ -15,6 +15,8 @@ namespace Proyecto_No._1_P.A
         {
             Efectivo = efectivo;
             Tarjeta = tarjeta;
+
         }
+        abstract class 
     }
 }
