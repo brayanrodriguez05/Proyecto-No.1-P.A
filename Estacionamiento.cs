@@ -8,8 +8,8 @@ namespace Proyecto_No._1_P.A
 {
     public class Estacionamiento
     {
-        private List<Vehiculo> vehiculosEstacionados;
-        private int capacidadMaxima;
+        public List<Vehiculo> vehiculosEstacionados;
+        public int capacidadMaxima;
 
         public Estacionamiento(int capacidad)
         {
