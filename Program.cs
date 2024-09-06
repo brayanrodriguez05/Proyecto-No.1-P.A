@@ -1,76 +1,118 @@
 ﻿
 
-
-
 using Proyecto_No._1_P.A;
 
-List <Vehiculo> listaVehiculos = new List <Vehiculo> ();
+Estacionamiento estacionamiento = new Estacionamiento();
+bool ejecutando = true;
 
-int opcion = 0;
-
-do
+while (ejecutando)
 {
-    Console.Clear();
-    Console.WriteLine("Bienvenido al menu");
-    Console.WriteLine("1. Registrar vehiculos");
-    Console.WriteLine("2. Retirar vehiculos");
-    Console.WriteLine("3. Visualizacion de vehiculos estacionados");
-    Console.WriteLine("4. Visualizacion de espacios disponibles");
+    Console.WriteLine("Menú Principal:");
+    Console.WriteLine("1. Registrar un nuevo vehículo");
+    Console.WriteLine("2. Retirar un vehículo");
+    Console.WriteLine("3. Ver vehículos estacionados");
+    Console.WriteLine("4. Ver espacios disponibles");
     Console.WriteLine("5. Salir");
-    Console.Write("Seleccione una de las opciones:");
+    Console.Write("Seleccione una opción: ");
+    string opcion = Console.ReadLine();
 
-    int opciones = int.Parse(Console.ReadLine());
-
-    switch (opciones)
+    switch (opcion)
     {
-        case 1:
-            // Registrar vehiculos
-
-            Console.Clear();
-            Console.Write("Ingrese el tipo de vehiculo que desea registrar (carro, moto o camion):");
-            string tipoVehiculo = Console.ReadLine();
-
-            Console.Write("Ingrese el numero de placa:");
-            string placa = Console.ReadLine();
-
-            Console.Write("Ingrese la hora de entrada:");
-            DateTime horaEntrada = DateTime.Now;
-
-
-
-            Console.ReadKey();
+        case "1":
+            RegistrarVehiculo(estacionamiento);
             break;
-        case 2:
-            // Retirar vehiculos
-
-            Console.Clear();
-            Console.Write("Ingrese la placa del vehiculo que desea retirar");
-
-            Console.ReadKey();
+        case "2":
+            RetirarVehiculo (estacionamiento);
             break;
-        case 3:
-            //Visualizacion de vehiculos estacionados
-
-            Console.Clear();
-            Console.ReadKey();
+        case "3":
+            estacionamiento.MostrarVehiculosEstacionados();
             break;
-        case 4:
-            // Visualizacion de espacios disponibles
-
-            Console.Clear();
-            Console.ReadKey();
+        case "4":
+            estacionamiento.MostrarEspaciosDisponibles();
             break;
-        case 5:
-            // Salir del programa
-
-            Console.Clear();
-            Console.WriteLine("Saliendo del programa...");
-            Console.ReadKey();
-            break ;
+        case "5":
+            ejecutando = false;
+            break;
         default:
-            Console.WriteLine("Error. Seleccione una opcion valida");
+            Console.WriteLine("Opción no válida.");
             break;
     }
+}
 
+    static void RegistrarVehiculo(Estacionamiento estacionamiento)
+{
+    Console.WriteLine("Ingrese los detalles del vehículo:");
+    Console.WriteLine("Tipo de vehículo (1. Auto, 2. Moto, 3. Camión): ");
+    string tipo = Console.ReadLine();
+    Console.Write("Placa: ");
+    string placa = Console.ReadLine();
+    Console.Write("Marca: ");
+    string marca = Console.ReadLine();
+    Console.Write("Modelo: ");
+    string modelo = Console.ReadLine();
+    Console.Write("Color: ");
+    string color = Console.ReadLine();
 
-} while (opcion != 5);
+    Vehiculo vehiculo;
+    switch (tipo)
+    {
+        case "1":
+            Console.Clear();
+            vehiculo = new Carro(placa, marca, modelo, color);
+            Console.ReadKey();
+            break;
+        case "2":
+            Console.Clear();
+            vehiculo = new Moto(placa, marca, modelo, color);
+            Console.ReadKey();
+            break;
+        case "3":
+            Console.Clear();
+            vehiculo = new Camion(placa, marca, modelo, color);
+            Console.ReadKey();
+            break;
+        default:
+            Console.WriteLine("Tipo de vehículo no válido.");
+            return;
+    }
+
+    estacionamiento.RegistrarVehiculo(vehiculo);
+}
+    static void RetirarVehiculo(Estacionamiento estacionamiento)
+    {
+        Console.Write("Ingrese la placa del vehículo que desea retirar: ");
+        string placa = Console.ReadLine();
+
+        if (estacionamiento.RetirarVehiculo(placa))
+        {
+            Console.WriteLine("Seleccione método de pago (1. Efectivo, 2. Tarjeta): ");
+            string metodoPago = Console.ReadLine();
+            Pago pago;
+
+            switch (metodoPago)
+            {
+                case "1":
+                Console.Clear();
+                    pago = new Pago_efectivo();
+                Console.ReadKey();
+                    break;
+                case "2":
+                Console.Clear();
+                    pago = new Pago_tarjeta();
+                Console.ReadKey();
+                    break;
+                default:
+                    Console.WriteLine("Método de pago no válido.");
+                    return;
+            }
+
+            if (pago.ProcesarPago(100)) // Ejemplo de monto, en la práctica se usaría la tarifa calculada
+            {
+                Console.WriteLine("Pago exitoso. Vehículo retirado.");
+            }
+            else
+            {
+                Console.WriteLine("Pago fallido. Intente nuevamente.");
+            }
+        }
+    }

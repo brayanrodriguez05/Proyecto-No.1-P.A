@@ -6,17 +6,8 @@ using System.Threading.Tasks;
 
 namespace Proyecto_No._1_P.A
 {
-   public class Pago
+   public abstract class Pago
     {
-        public double Efectivo { get; set; }
-        public double Tarjeta { get; set; }
-
-        public Pago(double efectivo, double tarjeta)
-        {
-            Efectivo = efectivo;
-            Tarjeta = tarjeta;
-
-        }
-        abstract class 
+        public abstract bool ProcesarPago(decimal monto);
     }
 }

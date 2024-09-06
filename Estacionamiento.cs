@@ -8,58 +8,50 @@ namespace Proyecto_No._1_P.A
 {
     public class Estacionamiento
     {
-        public List<Vehiculo> vehiculosEstacionados;
-        public int capacidadMaxima;
-
-        public Estacionamiento(int capacidad)
-        {
-            capacidadMaxima = capacidad;
-            vehiculosEstacionados = new List<Vehiculo>();
-        }
+        private List<Vehiculo> vehiculosEstacionados = new List<Vehiculo>();
+        private int capacidadMaxima = 50;
 
         public bool RegistrarVehiculo(Vehiculo vehiculo)
         {
-            if (vehiculosEstacionados.Count < capacidadMaxima)
+            if (vehiculosEstacionados.Count >= capacidadMaxima)
             {
-                vehiculosEstacionados.Add(vehiculo);
-                Console.WriteLine("Vehiculo registrado con exito.");
-                return true;
-            }
-            else
-            {
-                Console.WriteLine("No hay espacios disponibles.");
+                Console.WriteLine("Estacionamiento lleno. No se puede registrar el vehículo.");
                 return false;
             }
+            vehiculosEstacionados.Add(vehiculo);
+            Console.WriteLine("Vehículo registrado exitosamente.");
+            return true;
         }
 
         public bool RetirarVehiculo(string placa)
         {
-            Vehiculo vehiculo = vehiculosEstacionados.Find(v => v.Placa == placa);
-            if (vehiculo != null)
+            var vehiculo = vehiculosEstacionados.FirstOrDefault(v => v.Placa == placa);
+            if (vehiculo == null)
             {
-                vehiculosEstacionados.Remove(vehiculo);
-                Console.WriteLine("Vehiculo retirado exitosamente.");
-                return true;
-            }
-            else
-            {
-                Console.WriteLine("Vehiculo no encontrado. ");
+                Console.WriteLine("Vehículo no encontrado.");
                 return false;
             }
-        }
 
-        public int ObtenerEspaciosDisponibles()
-        {
-            return capacidadMaxima - vehiculosEstacionados.Count;
+            int horasEstacionado = (int)Math.Ceiling((DateTime.Now - vehiculo.HoraEntrada).TotalHours);
+            decimal tarifa = vehiculo.CalcularTarifa(horasEstacionado);
+            Console.WriteLine($"Tarifa a pagar: {tarifa:C}");
+
+            vehiculosEstacionados.Remove(vehiculo);
+            Console.WriteLine("Vehículo retirado exitosamente.");
+            return true;
         }
 
         public void MostrarVehiculosEstacionados()
         {
-            Console.WriteLine("Estos son los vehiculos que estan estan estacionados actualmente:");
-            foreach (Vehiculo vehiculo in vehiculosEstacionados)
+            foreach (var vehiculo in vehiculosEstacionados)
             {
-                Console.WriteLine($"Placa: {vehiculo.Placa}, Tiopo Vehiculo: {vehiculo.TipoVehiculo}, Hora de entrada: {vehiculo.HoraEntrada}");
+                Console.WriteLine($"{vehiculo.Placa} - {vehiculo.Marca} {vehiculo.Modelo} ({vehiculo.Color})");
             }
         }
-    }  
+
+        public void MostrarEspaciosDisponibles()
+        {
+            Console.WriteLine($"Espacios disponibles: {capacidadMaxima - vehiculosEstacionados.Count}");
+        }
+    }
 }
