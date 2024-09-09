@@ -10,7 +10,7 @@ namespace Proyecto_No._1_P.A
     {
         public override bool ProcesarPago(decimal monto)
         {
-            Console.WriteLine("Ingrese el monto entregado: ");
+            Console.Write("Ingrese el monto entregado: ");
             decimal montoEntregado = decimal.Parse(Console.ReadLine());
 
             if (montoEntregado < monto)

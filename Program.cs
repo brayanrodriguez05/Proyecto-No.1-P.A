@@ -7,6 +7,10 @@ bool ejecutando = true;
 
 while (ejecutando)
 {
+    Console.Clear();
+    Console.WriteLine("-----------------------");
+    Console.WriteLine("Bienvenido al CityPark ");
+    Console.WriteLine("----------------------- \n");
     Console.WriteLine("Menú Principal:");
     Console.WriteLine("1. Registrar un nuevo vehículo");
     Console.WriteLine("2. Retirar un vehículo");
@@ -20,18 +24,23 @@ while (ejecutando)
     {
         case "1":
             RegistrarVehiculo(estacionamiento);
+            Console.ReadKey();
             break;
         case "2":
             RetirarVehiculo (estacionamiento);
+            Console.ReadKey();
             break;
         case "3":
             estacionamiento.MostrarVehiculosEstacionados();
+            Console.ReadKey();
             break;
         case "4":
             estacionamiento.MostrarEspaciosDisponibles();
+            Console.ReadKey();
             break;
         case "5":
             ejecutando = false;
+            Console.ReadKey();
             break;
         default:
             Console.WriteLine("Opción no válida.");
@@ -106,7 +115,7 @@ while (ejecutando)
                     return;
             }
 
-            if (pago.ProcesarPago(100)) // Ejemplo de monto, en la práctica se usaría la tarifa calculada
+            if (pago.ProcesarPago(10))                                      // Ejemplo de monto.
             {
                 Console.WriteLine("Pago exitoso. Vehículo retirado.");
             }

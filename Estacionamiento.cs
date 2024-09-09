@@ -15,7 +15,7 @@ namespace Proyecto_No._1_P.A
         {
             if (vehiculosEstacionados.Count >= capacidadMaxima)
             {
-                Console.WriteLine("Estacionamiento lleno. No se puede registrar el vehículo.");
+                Console.WriteLine("Estacionamiento lleno. No puede registrar el vehículo.");
                 return false;
             }
             vehiculosEstacionados.Add(vehiculo);

@@ -20,7 +20,6 @@ namespace Proyecto_No._1_P.A
             Marca = marca;
             Modelo = modelo;
             Color = color;
-
             HoraEntrada = DateTime.Now;
         }
 

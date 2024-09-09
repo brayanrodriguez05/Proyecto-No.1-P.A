@@ -13,10 +13,13 @@ namespace Proyecto_No._1_P.A
             Console.WriteLine("Ingrese los detalles de la tarjeta.");
             Console.Write("Número de Tarjeta: ");
             string numeroTarjeta = Console.ReadLine();
+
             Console.Write("Nombre del Titular: ");
             string nombreTitular = Console.ReadLine();
+
             Console.Write("Fecha de Vencimiento (MM/AA): ");
             string fechaVencimiento = Console.ReadLine();
+
             Console.Write("CVV: ");
             string cvv = Console.ReadLine();
 
