@@ -23,15 +23,15 @@ namespace Proyecto_No._1_P.A
             Console.Write("CVV: ");
             string cvv = Console.ReadLine();
 
-            if (numeroTarjeta.Length == 16 && cvv.Length >= 3)             // Validación de la tarjeta
-            {
-                Console.WriteLine("Pago aprobado.");
-                return true;
-            }
-            else
+            if (numeroTarjeta.Length != 16 && cvv.Length != 3)             // Validación de la tarjeta
             {
                 Console.WriteLine("Detalles de tarjeta inválidos.");
                 return false;
+            }
+            else
+            {
+                Console.WriteLine("Pago aprobado.");
+                return true;
             }
         }
     }

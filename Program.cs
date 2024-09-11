@@ -1,5 +1,4 @@
 ﻿
-
 using Proyecto_No._1_P.A;
 
 Estacionamiento estacionamiento = new Estacionamiento();
@@ -70,11 +69,13 @@ while (ejecutando)
             vehiculo = new Carro(placa, marca, modelo, color);
             Console.ReadKey();
             break;
+
         case "2":
             Console.Clear();
             vehiculo = new Moto(placa, marca, modelo, color);
             Console.ReadKey();
             break;
+
         case "3":
             Console.Clear();
             vehiculo = new Camion(placa, marca, modelo, color);
@@ -94,7 +95,7 @@ while (ejecutando)
 
         if (estacionamiento.RetirarVehiculo(placa))
         {
-            Console.WriteLine("Seleccione método de pago (1. Efectivo, 2. Tarjeta): ");
+            Console.Write("Seleccione método de pago (1. Efectivo, 2. Tarjeta): ");
             string metodoPago = Console.ReadLine();
             Pago pago;
 
@@ -105,6 +106,7 @@ while (ejecutando)
                     pago = new Pago_efectivo();
                 Console.ReadKey();
                     break;
+
                 case "2":
                 Console.Clear();
                     pago = new Pago_tarjeta();

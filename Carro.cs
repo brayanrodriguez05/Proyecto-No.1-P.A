@@ -11,7 +11,7 @@ namespace Proyecto_No._1_P.A
         public Carro (string placa, string marca, string modelo, string color)
        : base(placa, marca, modelo, color) { }
 
-        public override decimal CalcularTarifa(int horas) // Cuota por hora para carros
+        public override decimal CalcularTarifa(int horas)                        // Cuota por hora para carros
         {
             return horas * 10m; 
         }
